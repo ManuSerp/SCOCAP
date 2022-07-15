@@ -9,11 +9,11 @@ class Celestial_body {
     // circular coordinates
    public:
     Celestial_body(float rayon, float mass);
-    float getRayon() const;
-    float getAngle() const;
-    float getDistance() const;
-    float getSpeed() const;
-    float getMass() const;
+    float getRayon();
+    float getAngle();
+    float getDistance();
+    float getSpeed();
+    float getMass();
 
    private:
     float s_rayon;
