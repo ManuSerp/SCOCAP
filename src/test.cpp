@@ -1,6 +1,6 @@
 #include "../header/celestial_body.h"
 #include "../header/spacecraft.h"
-#define MASSE_TERRE 5, 972
+#define MASSE_TERRE 5.972
 #define E_TERRE 24
 using namespace std;
 
