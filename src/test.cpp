@@ -31,9 +31,7 @@ void compute(Spacecraft* sp, Celestial_body cb, float t) {
     cout << "Force rayon : " << f->force_rayon << endl;
     cout << "Force theta : " << f->force_theta << endl;
     float ardt = t * f->force_rayon / sp->getMass();
-    cout << "ardt = " << ardt << endl;
     float athetadt = t * f->force_theta / (sp->getMass() * sp->getRayon());
-    cout << "athetadt = " << athetadt << endl;
 
     sp->setSpeed_rayon(sp->getSpeed_rayon() + ardt);
     sp->setSpeed_theta(sp->getSpeed_theta() + athetadt);
@@ -43,7 +41,7 @@ int main() {
     Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
     Celestial_body Terre(6371, MASSE_TERRE);
 
-    Spacecraft Apollo(10000, 0, 50, 0, 0);
+    Spacecraft Apollo(6300, 0, 50, 0, 0);
 
     Celestial_body centre = Terre;
     Force* f = new Force;

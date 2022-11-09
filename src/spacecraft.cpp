@@ -19,7 +19,7 @@ Spacecraft::Spacecraft(int rayon, int theta, int mass, int speed_theta,
       s_speed_theta((float)speed_theta),
       s_speed_rayon((float)speed_rayon) {}
 
-float Spacecraft::getRayon() { return (s_rayon); }
+float Spacecraft::getRayon() { return (s_rayon * 1000); }
 
 float Spacecraft::getTheta() { return (s_theta); }
 
