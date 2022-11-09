@@ -18,7 +18,7 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
         sqrt(pow(sp.getRayon() - cb.getRayon() * cos(angle_intra), 2) +
              pow(cb.getRayon() * sin(angle_intra), 2));
 
-    float force = (G * sp.getMass() * cb.getMass()) / pow(distance, 3);
+    float force = -(G * sp.getMass() * cb.getMass()) / pow(distance, 3);
 
     // projection sur les axes
     f->force_theta = force * (-cb.getRayon() * (angle_intra));
@@ -28,8 +28,6 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
 void compute(Spacecraft* sp, Celestial_body cb, float t) {
     Force* f = new Force;
     compute_force(*sp, cb, f);
-    cout << "Force rayon : " << f->force_rayon << endl;
-    cout << "Force theta : " << f->force_theta << endl;
     float ardt = t * f->force_rayon / sp->getMass();
     float athetadt = t * f->force_theta / (sp->getMass() * sp->getRayon());
 
@@ -41,14 +39,19 @@ int main() {
     Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
     Celestial_body Terre(6371, MASSE_TERRE);
 
-    Spacecraft Apollo(6300, 0, 50, 0, 0);
+    Spacecraft Apollo(6771, 0, 50, 8000, 0);
 
     Celestial_body centre = Terre;
     Force* f = new Force;
 
-    compute(&Apollo, centre, 1);
-    cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
-    cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
-
+    for (int i = 0; i < 50; i++) {
+        compute(&Apollo, centre, 1);
+        cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
+        cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
+        Apollo.compute_new_position(1);
+        cout << "altitude : "
+             << Apollo.getRayon() / 1000 - centre.getAstre_rayon() << endl;
+        cout << "Theta : " << Apollo.getTheta() << endl;
+    }
     return 0;
 }
