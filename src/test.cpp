@@ -25,18 +25,18 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
     f->force_rayon = force * (sp.getRayon() - cb.getRayon() * cos(angle_intra));
 }
 
-// void compute(Spacecraft sp, Celestial_body cb) {
-//     Force* f = new Force;
-//     compute_force(sp, cb, f);
-//     float acceleration = f / sp.getMass();
-//     float speed = sp.getSpeed_rayon() + acceleration;
-//     float rayon = sp.getRayon() + speed;
-//     sp.setRayon(rayon);
-//     sp.setSpeed_rayon(speed);
-// }
+void compute(Spacecraft sp, Celestial_body cb) {
+    Force* f = new Force;
+    compute_force(sp, cb, f);
+    float acceleration = f / sp.getMass();
+    float speed = sp.getSpeed_rayon() + acceleration;
+    float rayon = sp.getRayon() + speed;
+    sp.setSpeed_theta(rayon);
+    sp.setSpeed_rayon(speed);
+}
 
 int main() {
-    Celestial_body Lune(1737.4, 0.0123);
+    Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
     Celestial_body Terre(6371, MASSE_TERRE);
 
     Spacecraft Apollo(1, 0, 1, 50, 50);

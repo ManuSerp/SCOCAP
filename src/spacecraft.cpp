@@ -28,3 +28,19 @@ float Spacecraft::getSpeed_rayon() { return (s_speed_rayon); }
 float Spacecraft::getSpeed_theta() { return (s_speed_theta); }
 
 float Spacecraft::getMass() { return (s_mass); }
+
+int Spacecraft::setSpeed_rayon(float speed_rayon) {
+    s_speed_rayon = speed_rayon;
+    return 0;
+}
+
+int Spacecraft::setSpeed_theta(float speed_theta) {
+    s_speed_theta = speed_theta;
+    return 0;
+}
+
+int Spacecraft::compute_new_position() {
+    s_theta += s_speed_theta;
+    s_rayon += s_speed_rayon;
+    return 0;
+}

@@ -18,6 +18,9 @@ class Spacecraft {
     float getSpeed_theta();
     float getSpeed_rayon();
     float getMass();
+    int setSpeed_rayon(float speed_rayon);
+    int setSpeed_theta(float speed_theta);
+    int compute_new_position();
 
    private:
     float s_rayon;
