@@ -32,5 +32,4 @@
 *.app
 #directory
 build
-
 .vscode
