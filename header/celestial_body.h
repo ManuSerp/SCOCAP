@@ -10,12 +10,14 @@ class Celestial_body {
    public:
     Celestial_body(float rayon, float mass);
     float getRayon();
-    float getAngle();
+    float getAstre_rayon();
+    float getTheta();
     float getDistance();
     float getSpeed();
     float getMass();
 
    private:
+    float s_astre_rayon;
     float s_rayon;
     float s_angle;
     float s_distance;
