@@ -1,6 +1,7 @@
 #ifndef SPACECRAFT_H
 #define SPACECRAFT_H
 
+#include <cmath>
 #include <iostream>
 
 class Spacecraft {

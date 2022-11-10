@@ -21,7 +21,7 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
     float force = -(G * sp.getMass() * cb.getMass()) / pow(distance, 3);
 
     // projection sur les axes
-    f->force_theta = force * (-cb.getRayon() * (angle_intra));
+    f->force_theta = force * (-cb.getRayon() * sin(angle_intra));
     f->force_rayon = force * (sp.getRayon() - cb.getRayon() * cos(angle_intra));
 }
 

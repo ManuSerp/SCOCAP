@@ -1,6 +1,5 @@
 #include "../header/spacecraft.h"
 
-#include <cmath>
 using namespace std;
 
 Spacecraft::Spacecraft() : s_rayon(0), s_mass(0) {}
