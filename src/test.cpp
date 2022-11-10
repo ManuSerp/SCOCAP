@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "../header/celestial_body.h"
+#include "../header/image.h"
 #include "../header/nled_solver.h"
 #include "../header/spacecraft.h"
 
@@ -44,13 +45,18 @@ Nled_solver_arg_init* init(Spacecraft* sp, Celestial_body cb) {
     return args;
 }
 
-void pas(Spacecraft* sp, Celestial_body cb, float t) {
+void pas(Spacecraft* sp, Celestial_body cb, float t, Grid* g) {
     Force* f = new Force;
 
     Nled_solver_arg_init* args = init(sp, cb);
     nled_solver_init(args, t);
     sp->update_parameters(args);
     free(args);
+
+    // tableau image
+    g->r[g->n] = sp->getRayon();
+    g->t[g->n] = sp->getTheta();
+    g->n++;
 }
 
 int main() {
@@ -60,12 +66,22 @@ int main() {
     Spacecraft Apollo(6771000, 0, 50, 8000, 0);
 
     Celestial_body centre = Terre;
+    // image grid
+    Grid* g = new Grid;
+    g->r = new float[100];
+    g->t = new float[100];
+    g->n = 0;
+    g->width = 512;
+    g->height = 512;
+    // image grid
 
-    for (int i = 0; i < 10; i++) {
-        pas(&Apollo, centre, 1);
+    for (int i = 0; i < 100; i++) {
+        pas(&Apollo, centre, 100, g);
         cout << Apollo.getRayon() / 1000 << endl;
         cout << Apollo.getTheta() << endl;
     }
+
+    build_traj_image(g);
 
     // cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
     // cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
