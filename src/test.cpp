@@ -2,7 +2,9 @@
 #include <iostream>
 
 #include "../header/celestial_body.h"
+#include "../header/nled_solver.h"
 #include "../header/spacecraft.h"
+
 #define MASSE_TERRE 5.972 * pow(10, 24)
 #define G 6.674 * pow(10, -11)
 using namespace std;
@@ -44,7 +46,7 @@ int main() {
     Celestial_body centre = Terre;
     Force* f = new Force;
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < /*50*/ 0; i++) {
         compute(&Apollo, centre, 1);
         cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
         cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
@@ -53,5 +55,15 @@ int main() {
              << Apollo.getRayon() / 1000 - centre.getAstre_rayon() << endl;
         cout << "Theta : " << Apollo.getTheta() << endl;
     }
+
+    Nled_solver_arg* args = (Nled_solver_arg*)malloc(sizeof(Nled_solver_arg));
+    args->ar = -9.81;
+    args->at = 20;
+    args->r1 = 50;
+    args->rp1 = 0;
+    args->tp1 = 0;
+
+    nled_solver(args, 0.1);
+
     return 0;
 }
