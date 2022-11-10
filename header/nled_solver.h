@@ -1,6 +1,8 @@
 #ifndef NLED_SOLVER_H
 #define NLED_SOLVER_H
 
+#define GROUP_SIZE 11
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,5 +20,6 @@ typedef struct {
 } Nled_solver_arg_init;
 
 void nled_solver_init(Nled_solver_arg_init* arg, float h);
+void print_array(float* array, int size);
 
 #endif

@@ -27,6 +27,8 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
     f->force_rayon = force * (sp.getRayon() - cb.getRayon() * cos(angle_intra));
 }
 
+// pas sur
+
 void compute(Spacecraft* sp, Celestial_body cb, float t) {
     Force* f = new Force;
     compute_force(*sp, cb, f);
@@ -38,6 +40,22 @@ void compute(Spacecraft* sp, Celestial_body cb, float t) {
     // sp->setSpeed_theta(sp->getSpeed_theta() + athetadt);
 }
 
+Nled_solver_arg_init* init(Spacecraft* sp, Celestial_body cb) {
+    Nled_solver_arg_init* args =
+        (Nled_solver_arg_init*)malloc(sizeof(Nled_solver_arg_init));
+
+    Force* f = new Force;
+
+    compute_force(*sp, cb, f);
+
+    args->ar = f->force_rayon / sp->getMass();
+    args->at = f->force_theta / (sp->getMass());
+    args->r1 = sp->getRayon();
+    args->rp1 = sp->getSpeed_rayon();
+    args->tp1 = sp->getSpeed_theta();
+    return args;
+}
+
 int main() {
     Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
     Celestial_body Terre(6371, MASSE_TERRE);
@@ -47,7 +65,7 @@ int main() {
     Celestial_body centre = Terre;
     Force* f = new Force;
 
-    for (int i = 0; i < /*50*/ 1; i++) {
+    for (int i = 0; i < /*50*/ 0; i++) {
         compute(&Apollo, centre, 1);
         // cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
         // cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
@@ -57,15 +75,15 @@ int main() {
         // cout << "Theta : " << Apollo.getTheta() << endl;
     }
 
-    Nled_solver_arg_init* args =
-        (Nled_solver_arg_init*)malloc(sizeof(Nled_solver_arg_init));
-    args->ar = -8.69;
-    args->at = 0;
-    args->r1 = 6771000;
-    args->rp1 = 0;
-    args->tp1 = 0.001;
-
+    Nled_solver_arg_init* args = init(&Apollo, centre);
     nled_solver_init(args, 10);
+
+    printf("thetap: ");
+    print_array(args->thetap, 12);
+    printf("r: ");
+    print_array(args->r, 12);
+    printf("rp: ");
+    print_array(args->rp, 12);
 
     return 0;
 }
