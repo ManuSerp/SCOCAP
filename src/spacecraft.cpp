@@ -9,7 +9,7 @@ Spacecraft::Spacecraft(float rayon, float theta, float mass, float speed_theta,
     : s_rayon(rayon),
       s_theta(theta),
       s_mass(mass),
-      s_speed_theta(speed_theta / rayon),
+      s_speed_theta(speed_theta),
       s_speed_rayon(speed_rayon) {}
 
 Spacecraft::Spacecraft(int rayon, int theta, int mass, int speed_theta,
@@ -17,10 +17,10 @@ Spacecraft::Spacecraft(int rayon, int theta, int mass, int speed_theta,
     : s_rayon((float)rayon),
       s_theta((float)theta),
       s_mass((float)mass),
-      s_speed_theta((float)speed_theta / ((float)rayon * 1000)),
+      s_speed_theta((float)speed_theta),
       s_speed_rayon((float)speed_rayon) {}
 
-float Spacecraft::getRayon() { return (s_rayon * 1000); }
+float Spacecraft::getRayon() { return (s_rayon); }
 
 float Spacecraft::getTheta() { return (s_theta); }
 
@@ -46,5 +46,13 @@ int Spacecraft::compute_new_position(float t) {
 
     s_rayon = sqrt(pow(s_rayon + (s_speed_rayon / 1000) * t, 2) +
                    pow(s_rayon * s_speed_theta * t, 2));
+    return 0;
+}
+
+int Spacecraft::update_parameters(Nled_solver_arg_init *arg_init) {
+    s_rayon = arg_init->r[GROUP_SIZE - 1];
+    s_theta = arg_init->theta[GROUP_SIZE - 1];
+    s_speed_theta = arg_init->thetap[GROUP_SIZE - 1] * s_rayon;
+    s_speed_rayon = arg_init->rp[GROUP_SIZE - 1];
     return 0;
 }

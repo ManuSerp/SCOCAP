@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "../header/nled_solver.h"
+
 class Spacecraft {
    public:
     Spacecraft(float rayon, float theta, float mass, float speed_theta,
@@ -22,6 +24,7 @@ class Spacecraft {
     int setSpeed_rayon(float speed_rayon);
     int setSpeed_theta(float speed_theta);
     int compute_new_position(float t);
+    int update_parameters(Nled_solver_arg_init *arg_init);
 
    private:
     float s_rayon;

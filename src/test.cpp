@@ -27,44 +27,49 @@ void compute_force(Spacecraft sp, Celestial_body cb, Force* f) {
     f->force_rayon = force * (sp.getRayon() - cb.getRayon() * cos(angle_intra));
 }
 
-void compute(Spacecraft* sp, Celestial_body cb, float t) {
+Nled_solver_arg_init* init(Spacecraft* sp, Celestial_body cb) {
+    Nled_solver_arg_init* args =
+        (Nled_solver_arg_init*)malloc(sizeof(Nled_solver_arg_init));
+
     Force* f = new Force;
+
     compute_force(*sp, cb, f);
-    float ardt = f->force_rayon / sp->getMass();
-    float athetadt = f->force_theta / (sp->getMass() /** sp->getRayon()*/);
-    printf("force_rayon = %f\n", ardt);
-    printf("force_theta = %f\n", athetadt);
-    // sp->setSpeed_rayon(sp->getSpeed_rayon() + ardt);
-    // sp->setSpeed_theta(sp->getSpeed_theta() + athetadt);
+
+    args->ar = f->force_rayon / sp->getMass();
+    args->at = f->force_theta / (sp->getMass());
+    args->r1 = sp->getRayon();
+    args->rp1 = sp->getSpeed_rayon();
+    args->tp1 = sp->getSpeed_theta() / sp->getRayon();
+
+    return args;
+}
+
+void pas(Spacecraft* sp, Celestial_body cb, float t) {
+    Force* f = new Force;
+
+    Nled_solver_arg_init* args = init(sp, cb);
+    nled_solver_init(args, t);
+    sp->update_parameters(args);
+    free(args);
 }
 
 int main() {
     Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
-    Celestial_body Terre(6371, MASSE_TERRE);
+    Celestial_body Terre(6371000, MASSE_TERRE);
 
-    Spacecraft Apollo(6771, 0, 50, 8000, 0);
+    Spacecraft Apollo(6771000, 0, 50, 8000, 0);
 
     Celestial_body centre = Terre;
-    Force* f = new Force;
 
-    for (int i = 0; i < /*50*/ 1; i++) {
-        compute(&Apollo, centre, 1);
-        // cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
-        // cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
-        // Apollo.compute_new_position(1);
-        // cout << "altitude : "
-        //      << Apollo.getRayon() / 1000 - centre.getAstre_rayon() << endl;
-        // cout << "Theta : " << Apollo.getTheta() << endl;
+    for (int i = 0; i < 10; i++) {
+        pas(&Apollo, centre, 1);
+        cout << Apollo.getRayon() / 1000 << endl;
+        cout << Apollo.getTheta() << endl;
     }
 
-    Nled_solver_arg* args = (Nled_solver_arg*)malloc(sizeof(Nled_solver_arg));
-    args->ar = -8.69;
-    args->at = 0;
-    args->r1 = 6771000;
-    args->rp1 = 0;
-    args->tp1 = 0.001;
-
-    nled_solver(args, 10);
+    // cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;
+    // cout << "Speed theta : " << Apollo.getSpeed_theta() << endl;
+    // cout << "altitude : " << Apollo.getRayon() / 1000 << endl;
 
     return 0;
 }
