@@ -61,9 +61,10 @@ int main() {
 
     Celestial_body centre = Terre;
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 10; i++) {
         pas(&Apollo, centre, 1);
         cout << Apollo.getRayon() / 1000 << endl;
+        cout << Apollo.getTheta() << endl;
     }
 
     // cout << "Speed rayon : " << Apollo.getSpeed_rayon() << endl;

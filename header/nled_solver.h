@@ -17,6 +17,7 @@ typedef struct {
     float* r;
     float* rp;
     float* thetap;
+    float* theta;
 } Nled_solver_arg_init;
 
 void nled_solver_init(Nled_solver_arg_init* arg, float h);

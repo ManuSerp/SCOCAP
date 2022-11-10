@@ -51,7 +51,7 @@ int Spacecraft::compute_new_position(float t) {
 
 int Spacecraft::update_parameters(Nled_solver_arg_init *arg_init) {
     s_rayon = arg_init->r[GROUP_SIZE - 1];
-    // s_theta = arg_init->theta[GROUP_SIZE - 1];
+    s_theta = arg_init->theta[GROUP_SIZE - 1];
     s_speed_theta = arg_init->thetap[GROUP_SIZE - 1] * s_rayon;
     s_speed_rayon = arg_init->rp[GROUP_SIZE - 1];
     return 0;
