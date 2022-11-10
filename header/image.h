@@ -1,10 +1,9 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include <cmath>
 #include <iostream>
 #include <vector>
-
-#include "../src/lib/EasyBMP.hpp"
 
 typedef struct {
     float* r;
