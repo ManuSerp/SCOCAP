@@ -30,6 +30,7 @@ void nled_solver_init(Nled_solver_arg_init* arg, float h) {
     r[0] = arg->r1;
     rp[0] = arg->rp1;
     thetap[0] = arg->tp1;
+    theta[0] = arg->t1;
 
     for (int i = 0; i < GROUP_SIZE; i++) {
         thetap[i + 1] = cal_thetap(arg->at, thetap, r, rp, i, h);

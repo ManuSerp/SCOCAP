@@ -12,6 +12,7 @@ typedef struct {
     float ar;
     float at;
     float r1;
+    float t1;
     float rp1;
     float tp1;
     float* r;

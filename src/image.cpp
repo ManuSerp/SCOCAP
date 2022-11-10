@@ -12,8 +12,8 @@ int build_traj_image(Grid* g) {
         float rayon = g->r[k] / 100000;
         float theta = g->t[k];
 
-        int i = (int)(g->height / 2 - rayon * sin(theta));
-        int j = (int)(g->width / 2 + rayon * cos(theta));
+        int j = (int)(g->height / 2 + rayon * sin(theta));
+        int i = (int)(g->width / 2 + rayon * cos(theta));
 
         img.SetPixel(i, j, EasyBMP::RGBColor(255, 255, 255));
     }
