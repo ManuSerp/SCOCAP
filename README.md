@@ -14,3 +14,5 @@ implant runge kutta over euler
 
 
 I need to understand why theta wont change
+
+Write properly the algorithm followed by the solver
