@@ -57,14 +57,15 @@ int main() {
         // cout << "Theta : " << Apollo.getTheta() << endl;
     }
 
-    Nled_solver_arg* args = (Nled_solver_arg*)malloc(sizeof(Nled_solver_arg));
+    Nled_solver_arg_init* args =
+        (Nled_solver_arg_init*)malloc(sizeof(Nled_solver_arg_init));
     args->ar = -8.69;
     args->at = 0;
     args->r1 = 6771000;
     args->rp1 = 0;
     args->tp1 = 0.001;
 
-    nled_solver(args, 10);
+    nled_solver_init(args, 10);
 
     return 0;
 }

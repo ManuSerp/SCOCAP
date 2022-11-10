@@ -22,7 +22,7 @@ void print_array(float* array, int size) {
     printf("\n");
 }
 
-void nled_solver(Nled_solver_arg* arg, float h) {
+void nled_solver_init(Nled_solver_arg_init* arg, float h) {
     float* thetap = (float*)malloc(sizeof(float) * 12);
     float* r = (float*)malloc(sizeof(float) * 12);
     float* rp = (float*)malloc(sizeof(float) * 12);
@@ -35,6 +35,10 @@ void nled_solver(Nled_solver_arg* arg, float h) {
         rp[i + 1] = cal_rp(arg->ar, thetap, r, rp, i, h);
         r[i + 1] = cal_r(thetap, r, rp, i, h);
     }
+
+    arg->r = r;
+    arg->rp = rp;
+    arg->thetap = thetap;
 
     printf("thetap: ");
     print_array(thetap, 12);
