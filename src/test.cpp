@@ -41,6 +41,7 @@ Nled_solver_arg_init* init(Spacecraft* sp, Celestial_body cb) {
     args->r1 = sp->getRayon();
     args->rp1 = sp->getSpeed_rayon();
     args->tp1 = sp->getSpeed_theta() / sp->getRayon();
+    args->t1 = sp->getTheta();
 
     return args;
 }
@@ -68,17 +69,20 @@ int main() {
     Celestial_body centre = Terre;
     // image grid
     Grid* g = new Grid;
-    g->r = new float[100];
-    g->t = new float[100];
+    g->r = new float[100000];
+    g->t = new float[100000];
     g->n = 0;
     g->width = 512;
     g->height = 512;
     // image grid
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 1000; i++) {
+        cout << "i = " << i << endl;
         pas(&Apollo, centre, 100, g);
-        cout << Apollo.getRayon() / 1000 << endl;
-        cout << Apollo.getTheta() << endl;
+        cout << "rayon = " << Apollo.getRayon() / 1000 << endl;
+        cout << "theta = " << Apollo.getTheta() << endl;
+        cout << "speed_rayon = " << Apollo.getSpeed_rayon() << endl;
+        cout << "speed_theta = " << Apollo.getSpeed_theta() << endl;
     }
 
     build_traj_image(g);
