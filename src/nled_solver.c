@@ -39,4 +39,11 @@ void nled_solver_init(Nled_solver_arg_init* arg, float h) {
     arg->r = r;
     arg->rp = rp;
     arg->thetap = thetap;
+
+    // printf("thetap: ");
+    // print_array(thetap, GROUP_SIZE);
+    // printf("r: ");
+    // print_array(r, GROUP_SIZE);
+    // printf("rp: ");
+    // print_array(rp, GROUP_SIZE);
 }
