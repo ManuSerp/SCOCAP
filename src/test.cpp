@@ -76,9 +76,9 @@ int main() {
     g->height = 512;
     // image grid
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 10000; i++) {
         cout << "i = " << i << endl;
-        pas(&Apollo, centre, 100, g);
+        pas(&Apollo, centre, 0.1, g);
         cout << "rayon = " << Apollo.getRayon() / 1000 << endl;
         cout << "theta = " << Apollo.getTheta() << endl;
         cout << "speed_rayon = " << Apollo.getSpeed_rayon() << endl;
