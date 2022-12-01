@@ -36,7 +36,7 @@ void nled_solver_init(Nled_solver_arg_init* arg, float h) {
         thetap[i + 1] = cal_thetap(arg->at, thetap, r, rp, i, h);
         rp[i + 1] = cal_rp(arg->ar, thetap, r, rp, i, h);
         r[i + 1] = cal_r(r, rp, i, h);
-        theta[i] = cal_t(thetap, theta, i, h);
+        theta[i + 1] = cal_t(thetap, theta, i, h);
     }
 
     arg->r = r;
