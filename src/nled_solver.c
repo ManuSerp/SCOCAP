@@ -23,10 +23,14 @@ void print_array(float* array, int size) {
 }
 
 void nled_solver_init(Nled_solver_arg_init* arg, float h) {
-    float* thetap = (float*)malloc(sizeof(float) * GROUP_SIZE);
-    float* theta = (float*)malloc(sizeof(float) * GROUP_SIZE);
-    float* r = (float*)malloc(sizeof(float) * GROUP_SIZE);
-    float* rp = (float*)malloc(sizeof(float) * GROUP_SIZE);
+    float* thetap = (float*)malloc(
+        sizeof(float) *
+        GROUP_SIZE);  // /!\/!\/!\/!\/!\/!\ faut virer les mallocs c'est connu a
+                      // la compil et pas tres grands, on vas aller beaucoup
+                      // plus vite comme ça
+    float* theta = (float*)malloc(sizeof(float) * GROUP_SIZE);  // /!\ idem
+    float* r = (float*)malloc(sizeof(float) * GROUP_SIZE);      // /!\ idem
+    float* rp = (float*)malloc(sizeof(float) * GROUP_SIZE);     // /!\ idem
     r[0] = arg->r1;
     rp[0] = arg->rp1;
     thetap[0] = arg->tp1;
