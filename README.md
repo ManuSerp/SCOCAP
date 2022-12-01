@@ -8,11 +8,10 @@ Force computing -> sum here the force of all body and then nothing change
 
 makefile avec un dossier build et des point o plus propre
 
-implant image generator
+
+add multi celestial object computing
 
 implant runge kutta over euler
 
-
-I need to understand why theta wont change
 
 Write properly the algorithm followed by the solver
