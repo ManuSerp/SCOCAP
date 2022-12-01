@@ -15,3 +15,6 @@ implant runge kutta over euler
 
 
 Write properly the algorithm followed by the solver
+
+
+Eliminate useless malloc
