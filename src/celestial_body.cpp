@@ -19,3 +19,12 @@ float Celestial_body::getDistance() { return s_distance; }
 float Celestial_body::getSpeed() { return s_speed; }
 
 float Celestial_body::getMass() { return s_mass; }
+
+void Celestial_body::update() { s_angle += s_speed; }
+
+Celestial_body** init_cb_list(int len) {
+    Celestial_body** cb_list =
+        (Celestial_body**)malloc(sizeof(Celestial_body*) * (len + 1));
+    cb_list[0] = (Celestial_body*)len;
+    return cb_list;
+}
