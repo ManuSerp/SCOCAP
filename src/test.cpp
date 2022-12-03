@@ -29,10 +29,13 @@ void compute_force(Spacecraft sp, Celestial_body** cb_list, Force* f) {
 
         // projection sur les axes
         f_temp->force_theta =
-            force * (-(*cb_list[i]).getRayon() * sin(angle_intra));
+            force * ((*cb_list[i]).getRayon() * sin(angle_intra));
         f_temp->force_rayon =
             force *
             (sp.getRayon() - (*cb_list[i]).getRayon() * cos(angle_intra));
+
+        printf("force_theta : %f, %d\n", f_temp->force_theta, i);
+        printf("force_rayon : %f, %d\n", f_temp->force_rayon, i);
         f->force_rayon += f_temp->force_rayon;
         f->force_theta += f_temp->force_theta;
     }
@@ -74,23 +77,26 @@ void pas(Spacecraft* sp, Celestial_body** cb_list, float t,
 int main() {
     Celestial_body Lune(1737.4, 0.0123 * MASSE_TERRE);
     Celestial_body Terre(6371000, MASSE_TERRE);
+    Celestial_body Terre2(6371000, MASSE_TERRE,0, 3 * 6371000);
 
-    Spacecraft Apollo(6771000, 0, 50, 8000, 0);
+    Spacecraft Apollo(6771000, 3.14, 50, 10000, 0);
 
     Celestial_body centre = Terre;
 
-    Celestial_body** cb_list = init_cb_list(2);
+    Celestial_body** cb_list = init_cb_list(3);
+
     cb_list[1] = &centre;
+    cb_list[2] = &Terre2;
     // image grid
     Grid* g = new Grid;
     g->r = new float[100000];
     g->t = new float[100000];
     g->n = 0;
-    g->width = 512;
-    g->height = 512;
+    g->width = 1024;
+    g->height = 1024;
     // image grid
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 100000; i++) {
         cout << "i = " << i << endl;
 
         pas(&Apollo, cb_list, 0.1,
