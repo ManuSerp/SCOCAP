@@ -9,6 +9,8 @@ class Celestial_body {
     // circular coordinates
    public:
     Celestial_body(float rayon, float mass);
+    Celestial_body(float rayon, float mass, float theta, float pos_rayon);
+    void update();
     float getRayon();
     float getAstre_rayon();
     float getTheta();
@@ -24,5 +26,7 @@ class Celestial_body {
     float s_speed;
     float s_mass;
 };
+
+Celestial_body** init_cb_list(int len);
 
 #endif

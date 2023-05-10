@@ -20,6 +20,7 @@ int build_traj_image(Grid* g) {
 
     img.SetPixel(g->height / 2, g->width / 2, EasyBMP::RGBColor(255, 0, 0));
 
+
     img.Write();
 
     return 0;
